@@ -1,0 +1,31 @@
+/* 
+ * Este archivo está incluido, pero la mayoría de los estilos se manejan con Tailwind CSS
+ * en las plantillas HTML (que se carga mediante un CDN en base.html).
+ *
+ * Si necesitas añadir estilos personalizados que no sean de Tailwind, agrégalos aquí.
+ * Por ejemplo:
+ */
+
+/* 
+ * Es buena práctica añadir estilos para mejorar la apariencia de los forms 
+ * en caso de no usar clases de CSS 
+ */
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select,
+textarea {
+  /* Clases de Tailwind replicadas para mejor soporte visual en Django forms */
+  @apply border border-gray-300 rounded-md shadow-sm p-2;
+}
+
+/* 
+ * Opcional: Estilo personalizado de la etiqueta del proyecto 
+ */
+.project-tag {
+  background-color: #f0f4ff;
+  color: #4338ca;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}

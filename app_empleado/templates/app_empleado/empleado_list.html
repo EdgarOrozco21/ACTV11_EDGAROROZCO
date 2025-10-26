@@ -1,0 +1,44 @@
+{% extends 'app_empleado/base.html' %}
+
+{% block content %}
+
+<h1 class="text-4xl font-extrabold text-gray-800 mb-8 border-b-2 pb-2">Listado de Empleados</h1>
+
+{% if empleados %}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+{% for empleado in empleados %}
+<div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+<h2 class="text-xl font-bold text-indigo-600 mb-2">
+<a href="{% url 'empleado_detail' empleado.pk %}" class="hover:underline">
+{{ empleado.nombre }} {{ empleado.apellido }}
+</a>
+</h2>
+<p class="text-gray-600 mb-3">{{ empleado.puesto }}</p>
+
+        <div class="text-sm space-y-1">
+            <p class="text-gray-700"><strong>Correo:</strong> {{ empleado.correo }}</p>
+            {% if empleado.telefono %}
+                <p class="text-gray-700"><strong>Teléfono:</strong> {{ empleado.telefono }}</p>
+            {% endif %}
+        </div>
+
+        <div class="mt-4 flex space-x-3">
+            <a href="{% url 'empleado_update' empleado.pk %}" class="text-sm text-blue-500 hover:text-blue-700 font-medium">Editar</a>
+            <span class="text-gray-300">|</span>
+            <a href="{% url 'empleado_delete' empleado.pk %}" class="text-sm text-red-500 hover:text-red-700 font-medium">Eliminar</a>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+
+{% else %}
+<p class="text-gray-600">No hay empleados registrados en la agencia.</p>
+{% endif %}
+
+<div class="mt-10 text-center">
+<a href="{% url 'empleado_create' %}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md">
+Agregar Nuevo Empleado
+</a>
+</div>
+{% endblock %}

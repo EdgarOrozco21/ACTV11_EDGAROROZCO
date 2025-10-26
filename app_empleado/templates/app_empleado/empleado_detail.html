@@ -1,0 +1,73 @@
+{% extends 'app_empleado/base.html' %}
+
+{% block content %}
+
+<div class="bg-white p-8 rounded-xl shadow-2xl max-w-4xl mx-auto">
+<h1 class="text-4xl font-extrabold text-indigo-700 mb-6 border-b pb-3">
+Detalle del Empleado: {{ empleado.nombre }} {{ empleado.apellido }}
+</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
+    <div>
+        <p class="text-lg font-semibold">Puesto:</p>
+        <p class="text-2xl font-light text-indigo-500">{{ empleado.puesto }}</p>
+    </div>
+    <div>
+        <p class="text-lg font-semibold">Correo:</p>
+        <p class="text-2xl font-light">{{ empleado.correo }}</p>
+    </div>
+    <div>
+        <p class="text-lg font-semibold">Teléfono:</p>
+        <p class="text-2xl font-light">{{ empleado.telefono|default:"N/A" }}</p>
+    </div>
+</div>
+
+<div class="mt-8 pt-6 border-t">
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">Proyectos Asignados</h2>
+    
+    {% if empleado.proyectos.all %}
+        <ul class="space-y-4">
+        {% for proyecto in empleado.proyectos.all %}
+            <li class="p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="text-xl font-semibold text-gray-800">{{ proyecto.nombre }}</p>
+                        <p class="text-sm text-gray-600">
+                            Inicio: {{ proyecto.fecha_inicio|date:"d M Y" }} | 
+                            Entrega: <span class="font-medium text-red-600">{{ proyecto.fecha_entrega|date:"d M Y" }}</span>
+                        </p>
+                        <p class="text-sm text-gray-500 mt-1">Campaña ID: {{ proyecto.id_campaña|default:"No Asignado" }}</p>
+                    </div>
+                    <a href="{% url 'proyecto_delete' proyecto.pk %}" class="text-red-500 hover:text-red-700 text-sm">Borrar Proyecto</a>
+                </div>
+                <p class="mt-2 text-sm italic">{{ proyecto.descripcion|truncatewords:20 }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-gray-500 italic">Este empleado no tiene proyectos asignados actualmente.</p>
+    {% endif %}
+
+    <div class="mt-6">
+        <!-- El formulario de proyecto usará un select para elegir el empleado, pero podríamos optimizarlo si pasamos el empleado.pk en la URL -->
+        <a href="{% url 'proyecto_create' %}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+            Asignar Nuevo Proyecto
+        </a>
+    </div>
+</div>
+
+<div class="mt-10 flex space-x-4 border-t pt-5">
+    <a href="{% url 'empleado_update' empleado.pk %}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 shadow-md">
+        Editar Empleado
+    </a>
+    <a href="{% url 'empleado_delete' empleado.pk %}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300 shadow-md">
+        Eliminar Empleado
+    </a>
+    <a href="{% url 'empleado_list' %}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded transition duration-300 shadow-md">
+        Volver al Listado
+    </a>
+</div>
+
+
+</div>
+{% endblock %}

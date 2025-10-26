@@ -1,0 +1,34 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agencia de Marketing - Gestión de Empleados</title>
+<!-- Incluye tu archivo CSS modificado si existe -->
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<!-- Tailwind CSS CDN para una estética moderna -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<nav class="bg-indigo-600 p-4 shadow-lg">
+<div class="container mx-auto flex justify-between items-center">
+<a href="{% url 'empleado_list' %}" class="text-white text-2xl font-bold">Agencia de Marketing UII Act 11</a>
+<div class="space-x-4">
+<a href="{% url 'empleado_list' %}" class="text-white hover:text-indigo-200 transition duration-300">Lista de Empleados</a>
+<a href="{% url 'empleado_create' %}" class="bg-white text-indigo-600 px-3 py-1 rounded-full font-semibold hover:bg-indigo-100 transition duration-300">Nuevo Empleado</a>
+</div>
+</div>
+</nav>
+
+<main class="container mx-auto mt-8 p-4">
+    {% block content %}
+    {% endblock %}
+</main>
+
+
+</body>
+</html>

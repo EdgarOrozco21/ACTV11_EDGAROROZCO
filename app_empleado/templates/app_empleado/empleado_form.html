@@ -1,0 +1,73 @@
+{% extends 'app_empleado/base.html' %}
+
+{% block title %}
+{% if object %}Editar Empleado{% else %}Crear Nuevo Empleado{% endif %}
+{% endblock title %}
+
+{% block content %}
+
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-2xl mt-10">
+<div class="bg-white p-8 rounded-lg shadow-xl">
+<h1 class="text-3xl font-extrabold text-gray-900 mb-6 text-center">
+{% if object %}
+<i class="fas fa-user-edit mr-2 text-indigo-600"></i> Editar Empleado
+{% else %}
+<i class="fas fa-user-plus mr-2 text-indigo-600"></i> Agregar Nuevo Empleado
+{% endif %}
+</h1>
+
+    <!-- Formulario con soporte para subida de archivos (enctype) -->
+    <form method="post" enctype="multipart/form-data" class="space-y-6">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div>
+                <!-- Etiqueta del campo -->
+                <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">
+                    {{ field.label }}
+                    {% if field.field.required %}
+                        <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                
+                <!-- Campo del formulario -->
+                {% if field.widget_type == 'clearablefileinput' %}
+                    <!-- TRATAMIENTO ESPECIAL para FileField (campo de fotos) -->
+                    <div class="mt-1 flex items-center space-x-2">
+                        {{ field }}
+                        {% if field.url and not field.errors %}
+                            <a href="{{ field.url }}" target="_blank" class="text-indigo-600 hover:text-indigo-800 text-sm">Ver Actual</a>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <!-- TRATAMIENTO GENERAL para otros campos (Texto, Email, etc.) -->
+                    <!-- SINTAXIS CORREGIDA: Usa field.as_widget(attrs={...}) para aplicar las clases -->
+                     {{ field }}
+                {% endif %}
+                
+                <!-- Mensajes de ayuda -->
+                {% if field.help_text %}
+                    <p class="mt-2 text-sm text-gray-500">{{ field.help_text }}</p>
+                {% endif %}
+                
+                <!-- Mensajes de error -->
+                {% for error in field.errors %}
+                    <p class="mt-2 text-sm text-red-600">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <div class="flex justify-end space-x-4 pt-4">
+            <a href="{% url 'empleado_list' %}" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150">
+                Cancelar
+            </a>
+            <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150">
+                {% if object %}Guardar Cambios{% else %}Crear Empleado{% endif %}
+            </button>
+        </div>
+    </form>
+</div>
+
+
+</div>
+{% endblock content %}
