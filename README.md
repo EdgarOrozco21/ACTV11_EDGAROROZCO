@@ -16,7 +16,7 @@
 <img width="958" height="286" alt="image" src="https://github.com/user-attachments/assets/ae5dfe05-551c-41d7-ba3f-381cc1fd7c54" />
 
 ## AGREGAR PROYECTO A EMPLEADO
-<img width="956" height="473" alt="image" src="https://github.com/user-attachments/assets/63e1eeb0-9be6-4469-ad20-3bd37f9881a1" 
+<img width="956" height="473" alt="image" src="https://github.com/user-attachments/assets/63e1eeb0-9be6-4469-ad20-3bd37f9881a1" />
 <img width="956" height="472" alt="image" src="https://github.com/user-attachments/assets/8070b1c9-8243-4438-9e78-7c783bebea14" />
 <img width="959" height="472" alt="image" src="https://github.com/user-attachments/assets/e4df4249-e8dc-4705-9404-71694d7d0d7e" />
 <img width="959" height="479" alt="image" src="https://github.com/user-attachments/assets/85ff315d-103b-4b7f-bec4-985d870217a1" />
